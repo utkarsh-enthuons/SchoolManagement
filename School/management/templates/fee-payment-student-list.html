@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block content%}
+    <!-- Page Area Start Here -->
+    <div class="dashboard-page-one">
+        {% include 'sidebar.html' %}
+        <div class="dashboard-content-one">
+            <!-- Breadcubs Area Start Here -->
+            <div class="breadcrumbs-area">
+                <h3>Fees</h3>
+                <ul>
+                    <li>
+                        <a href="{% url 'homepage' %}">Home</a>
+                    </li>
+                    <li>Fee Payment Student List</li>
+                </ul>
+            </div>
+            <!-- Breadcubs Area End Here -->
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags %}
+                    <div class="alert alert-success {{ message.tags }}" role="alert">{{ message }}</div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <!-- Group table area start here-->
+            <div class="card height-auto">
+                <div class="card-body">
+                    <div class="heading-layout1">
+                        <div class="item-title">
+                            <h3>Fee Payment Student List</h3>
+                        </div>
+                    </div>
+                    <form action="{% url 'student search' %}" method="post" class="new-added-form mg-b-20" id="studentSearchForm" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row gutters-8">
+                            <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
+                                {{ form.class_id }}
+                                {% for error in form.class_id.errors%}
+                                <small class="text-danger">{{error}}</small>
+                                {%endfor%}
+                            </div>
+                            <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
+                                {{ form.phone_number }}
+                                {% for error in form.phone_number.errors%}
+                                <small class="text-danger">{{error}}</small>
+                                {%endfor%}
+                            </div>
+                            <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
+                                {{ form.name }}
+                                {% for error in form.name.errors%}
+                                <small class="text-danger">{{error}}</small>
+                                {%endfor%}
+                            </div>
+                            <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
+                                <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="table-responsive">
+                        <table class="table display data-table text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Sr No.</th>
+                                    <th>Name</th>
+                                    <th>Father"s Name</th>
+                                    <th>Mother"s Name</th>
+                                    <th>Aadhar Card</th>
+                                    <th>Class</th>
+                                    <th>DOB</th>
+                                    <th>Status</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="searchResults">
+                            {% for student in students%}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td><a href="{% url "student_detail" student.id %}">{{student}}</a></td>
+                                <td>{{student.father_name}}</td>
+                                <td>{{student.mother_name}}</td>
+                                <td>{{student.aadhar_number}}</td>
+                                <td>{{student.admission_class}}</td>
+                                <td>{{student.DOB}} </td>
+                                <td class="text-center"><img src="{% if student.is_active %}{% static "img/icon-yes.svg" %}{% else %}{% static "img/icon-no.svg" %}{% endif %}" alt="Status Image"></td>
+                                <td class="text-center">
+                                    <a href="{% url 'fee payment' student.id %}" class="btn btn-primary mr-3 btn-lg"><i class="fas fa-handshake"></i> Pay Fee</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Group table area end here-->
+            <div class="mt-3" id="message"></div>
+        </div>
+    </div>
+{%endblock%}
+{%block js%}
+<script>
+    $(document).ready(function() {
+        $('#studentSearchForm').on('submit', function(e) {
+            e.preventDefault();  // Prevent the default form submission
+            var formData = $(this).serialize();
+            
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'GET',
+                data: formData,
+                dataType: 'json',
+                success: function(response) {       
+                    // Destroy the old DataTable instance if it exists
+                    if ($.fn.DataTable.isDataTable('.data-table')) {
+                        $('.data-table').DataTable().destroy();
+                    }             
+                    // Clear previous data
+                    $('#searchResults').empty();
+
+                    if (response.students.length > 0) {
+                        $.each(response.students, function(index, student) {
+                            $('#searchResults').append(
+                                '<tr>' +
+                                    '<td>' + (index + 1) + '</td>' +
+                                    '<td>' + student.first_name + ' ' + student.last_name + '</td>' +
+                                    '<td>' + student.father_name + '</td>' +
+                                    '<td>' + (student.mother_name || 'N/A') + '</td>' +  // Handle null values
+                                    '<td>' + (student.aadhar_number || 'N/A') + '</td>' +  // Handle null values
+                                    '<td>' + student.admission_class__class_name + '</td>' +
+                                    '<td>' + student.DOB + '</td>' +  // Use DOB field
+                                    '<td>' + (student.is_active ? '<img src="/static/img/icon-yes.svg" alt="Status Image">' : '<img src="/static/img/icon-no.svg" alt="Status Image">') + '</td>' +  // Status icon
+                                    '<td class="text-center">' +
+                                        '<a href="/fee-payment/' + student.id + '" class="btn btn-primary mr-3 btn-lg"><i class="fas fa-handshake"></i> Pay Fee</a>' +
+                                    '</td>' +
+                                '</tr>'
+                            );
+                        });
+
+                        // Reinitialize DataTable after appending data
+                        $('.data-table').DataTable({
+                            paging: true,
+                            searching: false,
+                            info: true,
+                            lengthChange: true,
+                            lengthMenu: [10, 20, 50, 75, 100],
+                            columnDefs: [{
+                                targets: [0, -1], // column or columns numbers
+                                orderable: true // set orderable for selected columns
+                            }],
+                            dom: 'Bfrtip'
+                        });
+                    } else {
+                        $('#searchResults').append('<tr class="text-center"><td colspan="9">No students found</td></tr>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors
+                    alert('Error: ' + error);
+                }
+            });
+        });
+    });
+
+</script>
+    
+{%endblock%}

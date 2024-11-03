@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block content%}
+    <!-- Page Area Start Here -->
+    <div class="dashboard-page-one">
+        {% include 'sidebar.html' %}
+        <div class="dashboard-content-one">
+            <!-- Breadcubs Area Start Here -->
+            <div class="breadcrumbs-area">
+                <h3>Transaction History</h3>
+                <ul>
+                    <li>
+                        <a href="{% url 'homepage' %}">Home</a>
+                    </li>
+                    <li>Transaction History</li>
+                </ul>
+            </div>
+            <!-- Breadcubs Area End Here -->
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags %}
+                    <div class="alert alert-success {{ message.tags }}" role="alert">{{ message }}</div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <!-- Group table area start here-->
+            <div class="card height-auto">
+                <div class="card-body">
+                    <div class="heading-layout1">
+                        <div class="item-title">
+                            <h3>Transaction List</h3>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table display data-table text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Sr No.</th>
+                                    <th>Transaction ID</th>
+                                    <th>Student Name</th>
+                                    <th>Class Name</th>
+                                    <th>Transaction Date</th>
+                                    <th>Transaction Type</th>
+                                    <th>Payment Mode</th>
+                                    <th>Paid Amount</th>
+                                    <th>Reference</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for TransactionData in TransactionDatas%}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td><a href="{% url 'transaction history detail' TransactionData.transaction_id %}">{{TransactionData.transaction_id}}</a></td>
+                                <td>{{TransactionData.student_id.first_name}} {{TransactionData.student_id.last_name}}</td>
+                                <td>{{TransactionData.student_id.admission_class}}</td>
+                                <td>{{TransactionData.transaction_date}}</td>
+                                <td>{{TransactionData.transaction_type}}</td>
+                                <td>{{TransactionData.payment_mode}}</td>
+                                <td>{{TransactionData.amount_paid}}</td>
+                                <td>{{TransactionData.reference_no}}</td>
+                                <td>{{TransactionData.remarks}}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Group table area end here-->
+            <div class="mt-3" id="message"></div>
+        </div>
+    </div>
+{%endblock%}
+{%block js%}
+{%endblock%}

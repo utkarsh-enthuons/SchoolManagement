@@ -1,0 +1,222 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block content%}
+    <!-- Page Area Start Here -->
+    <div class="dashboard-page-one">
+        {% include 'sidebar.html' %}
+        <div class="dashboard-content-one">
+            <!-- Breadcubs Area Start Here -->
+            <div class="breadcrumbs-area">
+                <h3>Admin Dashboard</h3>
+                <ul>
+                    <li>
+                        <a href="{% url 'homepage' %}">Home</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'fee structure add' %}">Fee</a>
+                    </li>
+                    <li>Fee Structure</li>
+                </ul>
+            </div>
+            <!-- Breadcubs Area End Here -->
+            <!-- Group table area start here-->
+            <div class="card height-auto">
+                <div class="card-body">
+                    <div class="heading-layout1">
+                        <div class="item-title">
+                            <h3>Add Fee Structure</h3>
+                        </div>
+                    </div>
+                    {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                        {% endfor %}
+                    {%endif%}
+                    <form action='' method="post" class="new-added-form" id="editForm" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.class_id.id_for_label }}">{{form.class_id.label}}</label>
+                                    {{ form.class_id }}
+                                    {% for error in form.class_id.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.monthly_fee.id_for_label }}">{{form.monthly_fee.label}}</label>
+                                    {{ form.monthly_fee }}
+                                    {% for error in form.monthly_fee.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.admission_fee.id_for_label }}">{{form.admission_fee.label}}</label>
+                                    {{ form.admission_fee }}
+                                    {% for error in form.admission_fee.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.first_quarter_exam_fee.id_for_label }}">{{form.first_quarter_exam_fee.label}}</label>
+                                    {{ form.first_quarter_exam_fee }}
+                                    {% for error in form.first_quarter_exam_fee.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.half_year_exam_fee.id_for_label }}">{{form.half_year_exam_fee.label}}</label>
+                                    {{ form.half_year_exam_fee }}
+                                    {% for error in form.half_year_exam_fee.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.second_quarter_exam_fee.id_for_label }}">{{form.second_quarter_exam_fee.label}}</label>
+                                    {{ form.second_quarter_exam_fee }}
+                                    {% for error in form.second_quarter_exam_fee.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.annual_exam_fee.id_for_label }}">{{form.annual_exam_fee.label}}</label>
+                                    {{ form.annual_exam_fee }}
+                                    {% for error in form.annual_exam_fee.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.board_reg_fee.id_for_label }}">{{form.board_reg_fee.label}}</label>
+                                    {{ form.board_reg_fee }}
+                                    {% for error in form.board_reg_fee.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.board_fee.id_for_label }}">{{form.board_fee.label}}</label>
+                                    {{ form.board_fee }}
+                                    {% for error in form.board_fee.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.admit_card_fee.id_for_label }}">{{form.admit_card_fee.label}}</label>
+                                    {{ form.admit_card_fee }}
+                                    {% for error in form.admit_card_fee.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.practical_1_fee.id_for_label }}">{{form.practical_1_fee.label}}</label>
+                                    {{ form.practical_1_fee }}
+                                    {% for error in form.practical_1_fee.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.practical_2_fee.id_for_label }}">{{form.practical_2_fee.label}}</label>
+                                    {{ form.practical_2_fee }}
+                                    {% for error in form.practical_2_fee.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.practical_3_fee.id_for_label }}">{{form.practical_3_fee.label}}</label>
+                                    {{ form.practical_3_fee }}
+                                    {% for error in form.practical_3_fee.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.practical_4_fee.id_for_label }}">{{form.practical_4_fee.label}}</label>
+                                    {{ form.practical_4_fee }}
+                                    {% for error in form.practical_4_fee.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mg-t-8 text-right">
+                            <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark mr-3">Create Fee structure</button>
+                            <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Group table area end here-->
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags %}
+                    <div class="alert alert-success {{ message.tags }}" role="alert">{{ message }}</div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{%endblock%}
+{%block js%}
+<script>
+    $(document).ready(function() {
+        // Initially hide all relevant fields
+        $('#id_board_reg_fee').closest('.col-md-6').hide();
+        $('#id_board_fee').closest('.col-md-6').hide();
+        $('#id_practical_1_fee').closest('.col-md-6').hide();
+        $('#id_practical_2_fee').closest('.col-md-6').hide();
+        $('#id_practical_3_fee').closest('.col-md-6').hide();
+        $('#id_practical_4_fee').closest('.col-md-6').hide();
+
+        // Function to show/hide fields based on class selection
+        $('#id_class_id').change(function() {
+            var selectedClass = $(this).val();
+
+            // Show board_reg_fee for 9th or 11th class
+            if (selectedClass === '9th_class' || selectedClass === '11th_class') {
+                $('#id_board_reg_fee').closest('.col-md-6').show();
+            } else {
+                $('#id_board_reg_fee').closest('.col-md-6').hide();
+            }
+
+            // Show board_fee and practical fees for 10th or 12th class
+            if (selectedClass === '10th_class' || selectedClass === '12th_class') {
+                $('#id_board_fee').closest('.col-md-6').show();
+                $('#id_practical_1_fee').closest('.col-md-6').show();
+                $('#id_practical_2_fee').closest('.col-md-6').show();
+                $('#id_practical_3_fee').closest('.col-md-6').show();
+                $('#id_practical_4_fee').closest('.col-md-6').show();
+            } else {
+                $('#id_board_fee').closest('.col-md-6').hide();
+                $('#id_practical_1_fee').closest('.col-md-6').hide();
+                $('#id_practical_2_fee').closest('.col-md-6').hide();
+                $('#id_practical_3_fee').closest('.col-md-6').hide();
+                $('#id_practical_4_fee').closest('.col-md-6').hide();
+            }
+        });
+    });
+</script>
+{%endblock%}

@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block content%}
+    <!-- Page Area Start Here -->
+    <div class="dashboard-page-one">
+        {% include 'sidebar.html' %}
+        <div class="dashboard-content-one">
+            <!-- Breadcubs Area Start Here -->
+            <div class="breadcrumbs-area">
+                <h3>Students</h3>
+                <ul>
+                    <li>
+                        <a href="{% url 'homepage' %}">Home</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'students' %}">Students</a>
+                    </li>
+                    <li>Student View</li>
+                </ul>
+            </div>
+            <div class="card height-auto">
+                <div class="card-body">
+                    <div class="heading-layout1">
+                        <div class="item-title">
+                            <h3>Student View</h3>
+                        </div>
+                    </div>
+                    <div class="single-info-details">
+                        <div class="item-img">
+                            <img src="{{student_det.profile_photo.url}}" width="100" height="100" class="profile-photo" alt="teacher">
+                        </div>
+                        <div class="item-content">
+                            <div class="header-inline item-header">
+                                <h3 class="text-dark-medium font-medium">{{student_det.first_name}} {{student_det.last_name}}</h3>
+                            </div>
+                            <div class="info-table table-responsive">
+                                <table class="table text-nowrap">
+                                    <tbody>
+                                        <tr>
+                                            <td>ID No:</td>
+                                            <td class="font-medium text-dark-medium">{{student_det.id}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Name:</td>
+                                            <td class="font-medium text-dark-medium">{{student_det.first_name}} {{student_det.last_name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mother Name:</td>
+                                            <td class="font-medium text-dark-medium">{{student_det.mother_name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Father Name:</td>
+                                            <td class="font-medium text-dark-medium">{{student_det.father_name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Phone No.:</td>
+                                            <td class="font-medium text-dark-medium">{{student_det.phone_number}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Alternative Phone number:</td>
+                                            <td class="font-medium text-dark-medium">{% if student_det.alternative_phone %} {{ student_det.alternative_phone }} {% else %} Not provided {% endif %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>E-mail:</td>
+                                            <td class="font-medium text-dark-medium">{{student_det.email}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Aadhar Card:</td>
+                                            <td class="font-medium text-dark-medium">{{student_det.aadhar_number}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gender:</td>
+                                            <td class="font-medium text-dark-medium">{{student_det.gender}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Category:</td>
+                                            <td class="font-medium text-dark-medium">{{student_det.category}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Permanent Address:</td>
+                                            <td class="font-medium text-dark-medium">{{student_det.per_house_no}}, {{student_det.per_landmark}}, {{student_det.per_city_or_village}},{{student_det.per_pincode}}, {{student_det.per_district}}, {{student_det.per_state}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Correspondence Address:</td>
+                                            <td class="font-medium text-dark-medium">{{student_det.cor_house_no}}, {{student_det.cor_landmark}}, {{student_det.cor_city_or_village}},{{student_det.cor_pincode}}, {{student_det.cor_district}}, {{student_det.cor_state}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Religion:</td>
+                                            <td class="font-medium text-dark-medium">{{student_det.religion}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Admission Class:</td>
+                                            <td class="font-medium text-dark-medium">{{student_det.admission_class}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Student Photo:</td>
+                                            <td class="font-medium text-dark-medium">{% if student_det.profile_photo %} <a href="{{student_det.profile_photo.url}}" target="_blank">View Photo</a> {% else %} Not provided yet {% endif %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Student's Sign:</td>
+                                            <td class="font-medium text-dark-medium">{% if student_det.Student_sign %} <a href="{{student_det.Student_sign.url}}" target="_blank">View Photo</a> {% else %} Not provided yet {% endif %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mother's Sign:</td>
+                                            <td class="font-medium text-dark-medium">{% if student_det.mother_sign %} <a href="{{student_det.mother_sign.url}}" target="_blank">View Photo</a> {% else %} Not provided yet {% endif %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Father's Sign:</td>
+                                            <td class="font-medium text-dark-medium">{% if student_det.father_sign %} <a href="{{student_det.father_sign.url}}" target="_blank">View Photo</a> {% else %} Not provided yet {% endif %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Birth Certificate:</td>
+                                            <td class="font-medium text-dark-medium">{% if student_det.birth_certificate %} <a href="{{student_det.birth_certificate.url}}" target="_blank">View Photo</a> {% else %} Not provided yet {% endif %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Character Certificate:</td>
+                                            <td class="font-medium text-dark-medium">{% if student_det.character_certificate %} <a href="{{student_det.character_certificate.url}}" target="_blank">View Photo</a> {% else %} Not provided yet {% endif %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Aadhar Card:</td>
+                                            <td class="font-medium text-dark-medium">{% if student_det.aadhar_card %} <a href="{{student_det.aadhar_card.url}}" target="_blank">View Photo</a> {% else %} Not provided yet {% endif %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Caste Certificate:</td>
+                                            <td class="font-medium text-dark-medium">{% if student_det.caste_certificate %} <a href="{{student_det.caste_certificate.url}}" target="_blank">View Photo</a> {% else %} Not provided yet {% endif %}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Group table area end here-->
+            <div class="mt-3" id="message"></div>
+        </div>
+    </div>
+{%endblock%}
+{%block js%}
+{%endblock%}

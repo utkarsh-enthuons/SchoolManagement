@@ -1,0 +1,370 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block content%}
+    <!-- Page Area Start Here -->
+    <div class="dashboard-page-one">
+        {% include 'sidebar.html' %}
+        <div class="dashboard-content-one">
+            <!-- Breadcubs Area Start Here -->
+            <div class="breadcrumbs-area">
+                <h3>Students</h3>
+                <ul>
+                    <li>
+                        <a href="{% url 'homepage' %}">Home</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'students' %}">Students</a>
+                    </li>
+                    <li>Add Student</li>
+                </ul>
+            </div>
+            <!-- Breadcubs Area End Here -->
+            <!-- Group table area start here-->
+            <div class="card height-auto">
+                <div class="card-body">
+                    <div class="heading-layout1">
+                        <div class="item-title">
+                            <h3>Add Student</h3>
+                        </div>
+                    </div>
+                    {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                        {% endfor %}
+                    {%endif%}
+                    <form action='' method="post" class="new-added-form" id="editForm" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.first_name.id_for_label }}">{{form.first_name.label}}</label>
+                                    {{ form.first_name }}
+                                    {% for error in form.first_name.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.last_name.id_for_label }}">{{form.last_name.label}}</label>
+                                    {{ form.last_name }}
+                                    {% for error in form.last_name.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.father_name.id_for_label }}">{{form.father_name.label}}</label>
+                                    {{ form.father_name }}
+                                    {% for error in form.father_name.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.mother_name.id_for_label }}">{{form.mother_name.label}}</label>
+                                    {{ form.mother_name }}
+                                    {% for error in form.mother_name.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.phone_number.id_for_label }}">{{form.phone_number.label}}</label>
+                                    {{ form.phone_number }}
+                                    {% for error in form.phone_number.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.alternative_phone.id_for_label }}">{{form.alternative_phone.label}}</label>
+                                    {{ form.alternative_phone }}
+                                    {% for error in form.alternative_phone.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.DOB.id_for_label }}">{{form.DOB.label}}</label>
+                                    {{ form.DOB }}
+                                    {% for error in form.DOB.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.enrollment_date.id_for_label }}">{{form.enrollment_date.label}}</label>
+                                    {{ form.enrollment_date }}
+                                    {% for error in form.enrollment_date.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.email.id_for_label }}">{{form.email.label}}</label>
+                                    {{ form.email }}
+                                    {% for error in form.email.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.aadhar_number.id_for_label }}">{{form.aadhar_number.label}}</label>
+                                    {{ form.aadhar_number }}
+                                    {% for error in form.aadhar_number.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.gender.id_for_label }}">{{form.gender.label}}</label>
+                                    {{ form.gender }}
+                                    {% for error in form.gender.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.category.id_for_label }}">{{form.category.label}}</label>
+                                    {{ form.category }}
+                                    {% for error in form.category.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card permanent-address">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Permanent Address</h4>
+                                        <div class="form-group">
+                                            <label for="{{form.per_house_no.id_for_label }}">{{form.per_house_no.label}}</label>
+                                            {{ form.per_house_no }}
+                                            {% for error in form.per_house_no.errors%}
+                                            <small class="text-danger">{{error}}</small>
+                                            {%endfor%}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="{{form.per_landmark.id_for_label }}">{{form.per_landmark.label}}</label>
+                                            {{ form.per_landmark }}
+                                            {% for error in form.per_landmark.errors%}
+                                            <small class="text-danger">{{error}}</small>
+                                            {%endfor%}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="{{form.per_city_or_village.id_for_label }}">{{form.per_city_or_village.label}}</label>
+                                            {{ form.per_city_or_village }}
+                                            {% for error in form.per_city_or_village.errors%}
+                                            <small class="text-danger">{{error}}</small>
+                                            {%endfor%}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="{{form.per_pincode.id_for_label }}">{{form.per_pincode.label}}</label>
+                                            {{ form.per_pincode }}
+                                            {% for error in form.per_pincode.errors%}
+                                            <small class="text-danger">{{error}}</small>
+                                            {%endfor%}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="{{form.per_district.id_for_label }}">{{form.per_district.label}}</label>
+                                            {{ form.per_district }}
+                                            {% for error in form.per_district.errors%}
+                                            <small class="text-danger">{{error}}</small>
+                                            {%endfor%}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title d-flex flex-wrap justify-content-between align-items-center">Correspendence Address
+                                            <div class="right text-gray text-10"><label for="mark" class="mb-0 d-flex align-items-center"><input type="checkbox" name="mark" class="mr-2" id="mark"> Same as Permanent Address</label></div>
+                                        </h4>
+                                        <div class="form-group">
+                                            <label for="{{form.cor_house_no.id_for_label }}">{{form.cor_house_no.label}}</label>
+                                            {{ form.cor_house_no }}
+                                            {% for error in form.cor_house_no.errors%}
+                                            <small class="text-danger">{{error}}</small>
+                                            {%endfor%}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="{{form.cor_landmark.id_for_label }}">{{form.cor_landmark.label}}</label>
+                                            {{ form.cor_landmark }}
+                                            {% for error in form.cor_landmark.errors%}
+                                            <small class="text-danger">{{error}}</small>
+                                            {%endfor%}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="{{form.cor_city_or_village.id_for_label }}">{{form.cor_city_or_village.label}}</label>
+                                            {{ form.cor_city_or_village }}
+                                            {% for error in formcorr_city_or_village.errors%}
+                                            <small class="text-danger">{{error}}</small>
+                                            {%endfor%}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="{{form.cor_pincode.id_for_label }}">{{form.cor_pincode.label}}</label>
+                                            {{ form.cor_pincode }}
+                                            {% for error in form.cor_pincode.errors%}
+                                            <small class="text-danger">{{error}}</small>
+                                            {%endfor%}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="{{form.cor_district.id_for_label }}">{{form.cor_district.label}}</label>
+                                            {{ form.cor_district }}
+                                            {% for error in form.cor_district.errors%}
+                                            <small class="text-danger">{{error}}</small>
+                                            {%endfor%}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.religion.id_for_label }}">{{form.religion.label}}</label>
+                                    {{ form.religion }}
+                                    {% for error in form.religion.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.nationality.id_for_label }}">{{form.nationality.label}}</label>
+                                    {{ form.nationality }}
+                                    {% for error in form.nationality.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.admission_class.id_for_label }}">{{form.admission_class.label}}</label>
+                                    {{ form.admission_class }}
+                                    {% for error in form.admission_class.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.profile_photo.id_for_label }}">{{form.profile_photo.label}}</label>
+                                    {{ form.profile_photo }}
+                                    {% for error in form.profile_photo.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.Student_sign.id_for_label }}">{{form.Student_sign.label}}</label>
+                                    {{ form.Student_sign }}
+                                    {% for error in form.Student_sign.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.mother_sign.id_for_label }}">{{form.mother_sign.label}}</label>
+                                    {{ form.mother_sign }}
+                                    {% for error in form.mother_sign.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.father_sign.id_for_label }}">{{form.father_sign.label}}</label>
+                                    {{ form.father_sign }}
+                                    {% for error in form.father_sign.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.birth_certificate.id_for_label }}">{{form.birth_certificate.label}}</label>
+                                    {{ form.birth_certificate }}
+                                    {% for error in form.birth_certificate.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.character_certificate.id_for_label }}">{{form.character_certificate.label}}</label>
+                                    {{ form.character_certificate }}
+                                    {% for error in form.character_certificate.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.aadhar_card.id_for_label }}">{{form.aadhar_card.label}}</label>
+                                    {{ form.aadhar_card }}
+                                    {% for error in form.aadhar_card.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="{{form.caste_certificate.id_for_label }}">{{form.caste_certificate.label}}</label>
+                                    {{ form.caste_certificate }}
+                                    {% for error in form.caste_certificate.errors%}
+                                    <small class="text-danger">{{error}}</small>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mg-t-8 text-right">
+                            <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Create Student</button>
+                            <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Group table area end here-->
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags %}
+                    <div class="alert alert-success {{ message.tags }}" role="alert">{{ message }}</div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{%endblock%}
+{%block js%}
+<script>
+    $('#mark').change(function() {
+        if ($(this).is(':checked')) {
+            // Copy values from Permanent Address to Correspondence Address
+            $('#id_cor_house_no').val($('#id_per_house_no').val()).prop('readonly', true);
+            $('#id_cor_landmark').val($('#id_per_landmark').val()).prop('readonly', true);
+            $('#id_cor_city_or_village').val($('#id_per_city_or_village').val()).prop('readonly', true);
+            $('#id_cor_pincode').val($('#id_per_pincode').val()).prop('readonly', true);
+            $('#id_cor_district').val($('#id_per_district').val()).prop('readonly', true);
+        } else {
+            // Clear values and make Correspondence Address fields editable again
+            $('#id_cor_house_no').val('').prop('readonly', false);
+            $('#id_cor_landmark').val('').prop('readonly', false);
+            $('#id_cor_city_or_village').val('').prop('readonly', false);
+            $('#id_cor_pincode').val('').prop('readonly', false);
+            $('#id_cor_district').val('').prop('readonly', false);
+        }
+    });
+</script>
+{%endblock%}

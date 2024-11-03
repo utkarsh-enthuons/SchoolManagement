@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block content%}
+    <!-- Page Area Start Here -->
+    <div class="dashboard-page-one">
+        {% include 'sidebar.html' %}
+        <div class="dashboard-content-one">
+            <!-- Breadcubs Area Start Here -->
+            <div class="breadcrumbs-area">
+                <h3>Admin Dashboard</h3>
+                <ul>
+                    <li>
+                        <a href="{% url 'homepage' %}">Home</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'groups' %}">Groups</a>
+                    </li>
+                    <li>Groups Add</li>
+                </ul>
+            </div>
+            <!-- Breadcubs Area End Here -->
+            <!-- Group table area start here-->
+            <div class="card height-auto">
+                <div class="card-body">
+                    <div class="heading-layout1">
+                        <div class="item-title">
+                            <h3>Add Group</h3>
+                        </div>
+                    </div>
+<!--                    {{form}}-->
+                    <form action="" method="post" class="new-added-form">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="{{ form.name.id_for_label }}">Name:</label>
+                            <input type="{{ form.name.field.widget.input_type }}"
+                                   name="{{ form.name.html_name }}"
+                                   value="{{ form.name.value|default_if_none:'' }}"
+                                   maxlength="150"
+                                   required
+                                   id="{{ form.name.id_for_label }}"
+                                   class="form-control">
+                        </div>
+
+                        <label class="mt-3">Permissions:</label>
+                        <div id="id_permissions" class="row">
+                            {% for checkbox in form.permissions %}
+                            <div class="col-xl-3 col-lg-6 col-12">
+                                <div class="form-check">
+                                    {{checkbox.tag}}
+                                    <label for="{{ checkbox.id_for_label }}" class="form-check-label">
+                                        {{ checkbox.choice_label }}
+                                    </label>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-12 form-group mg-t-8">
+                            <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
+                            <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
+                        </div>
+                    </form>
+
+                    <div class="mt-4">
+                        {% if messages %}
+                            {% for message in messages %}
+                                {% if message.tags %}
+                                <div class="alert alert-success {{ message.tags }}" role="alert">{{ message }}</div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!-- Group table area end here-->
+        </div>
+    </div>
+{%endblock%}

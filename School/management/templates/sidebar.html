@@ -1,0 +1,73 @@
+{% load static %}
+<!-- Sidebar Area Start Here -->
+<div class="sidebar-main sidebar-menu-one sidebar-expand-md sidebar-color">
+   <div class="mobile-sidebar-header d-md-none">
+        <div class="header-logo">
+            <a href="{% url 'homepage' %}"><img src="{% static 'img/logo1.png'%}" alt="logo"></a>
+        </div>
+   </div>
+    <div class="sidebar-menu-content">
+        <ul class="nav nav-sidebar-menu sidebar-toggle-view">
+            <li class="nav-item">
+                <a href="{% url 'homepage' %}" class="nav-link"><i class="flaticon-dashboard"></i><span>Dashboard</span></a>
+            </li>
+            <li class="nav-item sidebar-nav-item">
+                <a href="#" class="nav-link"><i class="flaticon-multiple-users-silhouette"></i><span>Groups</span></a>
+                <ul class="nav sub-group-menu">
+                    <li class="nav-item">
+                        <a href="{% url 'groups' %}" class="nav-link"><i class="fas fa-angle-right"></i>All Groups</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'group_add' %}" class="nav-link"><i class="fas fa-angle-right"></i>Add Group</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'subject' %}" class="nav-link"><i class="flaticon-dashboard"></i><span>Subject</span></a>
+            </li>
+            <li class="nav-item sidebar-nav-item">
+                <a href="#" class="nav-link"><i class="flaticon-multiple-users-silhouette"></i><span>Teachers</span></a>
+                <ul class="nav sub-group-menu">
+                    <li class="nav-item">
+                        <a href="{% url 'teachers' %}" class="nav-link"><i class="fas fa-angle-right"></i>All Teachers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'teacher add' %}" class="nav-link"><i class="fas fa-angle-right"></i>Add Teacher</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'classes' %}" class="nav-link"><i class="flaticon-dashboard"></i><span>Classes</span></a>
+            </li>
+            <li class="nav-item sidebar-nav-item">
+                <a href="#" class="nav-link"><i class="flaticon-multiple-users-silhouette"></i><span>Students</span></a>
+                <ul class="nav sub-group-menu">
+                    <li class="nav-item">
+                        <a href="{% url 'students' %}" class="nav-link"><i class="fas fa-angle-right"></i>All Students</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'student add' %}" class="nav-link"><i class="fas fa-angle-right"></i>Add Student</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item sidebar-nav-item">
+                <a href="#" class="nav-link"><i class="flaticon-multiple-users-silhouette"></i><span>Fees</span></a>
+                <ul class="nav sub-group-menu">
+                    <li class="nav-item">
+                        <a href="{% url 'fee structure list' %}" class="nav-link"><i class="fas fa-angle-right"></i>All Fee Structure</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'fee structure add' %}" class="nav-link"><i class="fas fa-angle-right"></i>Add Fee Structure</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'fee register' %}" class="nav-link"><i class="fas fa-angle-right"></i>Fee Register</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'logout' %}" class="nav-link"><i class="flaticon-planet-earth"></i><span>Logout</span></a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- Sidebar Area End Here -->

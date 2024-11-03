@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block content%}
+    <!-- Page Area Start Here -->
+    <div class="dashboard-page-one">
+        {% include 'sidebar.html' %}
+        <div class="dashboard-content-one">
+            <!-- Breadcubs Area Start Here -->
+            <div class="breadcrumbs-area">
+                <h3>Admin Dashboard</h3>
+                <ul>
+                    <li>
+                        <a href="{% url 'homepage' %}">Home</a>
+                    </li>
+                    <li>Groups</li>
+                </ul>
+            </div>
+            <!-- Breadcubs Area End Here -->
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags %}
+                    <div class="alert alert-success {{ message.tags }}" role="alert">{{ message }}</div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <!-- Group table area start here-->
+            <div class="card height-auto">
+                <div class="card-body">
+                    <div class="heading-layout1">
+                        <div class="item-title">
+                            <h3>Group List</h3>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table display data-table text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for groups in group%}
+                            <tr>
+                                <td>{{groups.name}}</td>
+                                <td class="text-center">
+                                    <a href="{% url 'group_edit' groups.id %}" class="btn btn-primary mr-3"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                    <a href="#" data-item-id="{{ groups.id }}" class="btn btn-danger" data-target="#confirmation-modal" data-toggle="modal"><i class="fas fa-times"></i> Delete</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Group table area end here-->
+            <div class="mt-3" id="message"></div>
+        </div>
+    </div>
+{%endblock%}
+{%block js%}
+<div class="modal fade" id="confirmation-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog success-modal-content" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="success-message warning">
+                    <div class="item-icon">
+                        <i class="fas fa-exclamation"></i>
+                    </div>
+                    <h3 class="item-title">You want to delete this file ?</h3>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <form id="deleteForm" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="item_id" id="item_id">
+                    <button type="button" class="footer-btn btn-danger" id="confirmDeleteBtn">Yes, Delete</button>
+                    <button type="button" class="footer-btn bg-dark-low" data-dismiss="modal">Cancel</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // Attach the event handler to the modal
+    $('#confirmation-modal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var itemId = button.attr('data-item-id'); // Extract info from data-* attributes
+        $('#item_id').val(itemId); // Update hidden input value
+        console.log("working", button, itemId);
+    });
+    $('#confirmDeleteBtn').on('click', function () {
+        var itemId = $('#item_id').val();
+        var row = $('a[data-item-id="' + itemId + '"]').closest('tr'); // Get the row to be removed
+        $.ajax({
+            url: '{% url "group_delete" %}', // URL to the view handling deletion
+            type: 'POST',
+            data: {
+                'item_id': itemId,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function (response) {
+                $('#confirmation-modal').modal('hide'); // Hide the modal on success
+                $('#message').html('<div class="alert alert-success">Item deleted successfully!</div>'); // Show success message
+                row.remove(); // Remove the row from the table
+            },
+            error: function (xhr, status, error) {
+                $('#confirmation-modal').modal('hide'); // Hide the modal on error
+                $('#message').html('<div class="alert alert-danger">An error occurred while deleting the item.</div>'); // Show error message
+            }
+        });
+    });
+</script>
+{%endblock%}
